@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { View, Button, TextInput, Text } from "react-native";
+import React, { useState, useContext } from "react";
+import { View, Button, TextInput, Text, TouchableOpacity } from "react-native";
+import { Context } from "../../Context/RegisterContext";
 
 export default function RegisterDesign() {
+  const { SignUp } = useContext(Context);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -17,6 +20,8 @@ export default function RegisterDesign() {
         placeholder="Password"
         onChangeText={(text) => setPassword(text)}
       />
+
+      <Button title="Register" onPress={() => SignUp()} />
     </View>
   );
 }

@@ -1,6 +1,8 @@
+import React from "react";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { Provider as RegisterProvider } from "./Context/RegisterContext";
 
 import TrackCreateScreen from "./src/TrackCreateScreen";
 import TrackDetailScreen from "./src/TrackDetailScreen";
@@ -21,4 +23,12 @@ const navigator = createSwitchNavigator({
   }),
 });
 
-export default createAppContainer(navigator);
+const App = createAppContainer(navigator);
+
+export default () => {
+  return (
+    <RegisterProvider>
+      <App />
+    </RegisterProvider>
+  );
+};
