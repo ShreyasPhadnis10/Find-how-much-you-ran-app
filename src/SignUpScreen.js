@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import RegisterDesign from "./components/RegisterDesign";
 
 export default function SignUpScreen({ navigation }) {
@@ -9,3 +9,11 @@ export default function SignUpScreen({ navigation }) {
     </View>
   );
 }
+
+SignUpScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
+const styles = StyleSheet.create({});
