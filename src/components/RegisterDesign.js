@@ -32,7 +32,7 @@ export default function RegisterDesign() {
         <Button
           title="Register"
           onPress={() => SignUp()}
-          style={{ color: "red" }}
+          style={ }
         />
       </View>
     </View>
