@@ -1,5 +1,6 @@
 import React from "react";
 import createDataContext from "./createDataContext";
+import tracks from "../api/tracks";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -9,17 +10,35 @@ const reducer = (state, action) => {
 };
 
 const SignUp = (dispatch) => {
-  return () => {
-    console.log("Hi");
+  return async ({ email, password }) => {
+    try {
+      const response = await tracks.post("/signup", { email, password });
+
+      const token = response.data.token;
+
+      console.log({ token });
+    } catch (err) {
+      console.log("Something is wrong");
+    }
   };
 };
 
-// const SignIn = (dispatch) => {
-//   return () => {};
-// };
+const SignIn = (dispatch) => {
+  return async ({ email, password }) => {
+    try {
+      const response = await tracks.post("/signin", { email, password });
+
+      const token = response.data.token;
+
+      console.log({ token });
+    } catch (err) {
+      console.log("something is wrong ");
+    }
+  };
+};
 
 export const { Provider, Context } = createDataContext(
   reducer,
-  { SignUp },
+  { SignUp, SignIn },
   { signedIn: false }
 );

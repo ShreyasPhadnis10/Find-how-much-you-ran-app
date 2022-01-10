@@ -1,10 +1,14 @@
 import React, { useState, useContext } from "react";
-import { View, Button, TextInput, StyleSheet, Image } from "react-native";
-import { Context } from "../../Context/RegisterContext";
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 
-export default function RegisterDesign() {
-  const { SignUp } = useContext(Context);
-
+export default function RegisterDesign({ callBack }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -21,6 +25,7 @@ export default function RegisterDesign() {
         />
 
         <TextInput
+          autoCapitalize={false}
           secureTextEntry
           value={password}
           placeholder="Password"
@@ -28,13 +33,13 @@ export default function RegisterDesign() {
           style={styles.password}
         />
       </View>
-      <View style={styles.button}>
-        <Button
-          title="Register"
-          onPress={() => SignUp()}
-          style={ }
-        />
-      </View>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => callBack({ email, password })}
+      >
+        <Text style={styles.txt}>Register</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -42,10 +47,13 @@ export default function RegisterDesign() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 5,
+    marginLeft: 10,
+    marginRight: 20,
   },
 
   image: {
-    marginTop: 60,
+    marginTop: 70,
     padding: 5,
 
     display: "flex",
@@ -57,7 +65,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 20,
     marginRight: 50,
-    marginLeft: 10,
   },
 
   button: {},
@@ -69,7 +76,7 @@ const styles = StyleSheet.create({
 
   email: {
     padding: 10,
-    textTransform: "uppercase",
+
     fontSize: 12,
     borderBottomWidth: 1,
     borderBottomColor: "gray",
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
   password: {
     marginTop: 20,
     padding: 10,
-    textTransform: "uppercase",
+
     fontSize: 12,
     borderBottomWidth: 1,
     borderBottomColor: "gray",
@@ -88,8 +95,19 @@ const styles = StyleSheet.create({
 
   button: {
     padding: 10,
-    marginRight: 20,
+    borderRadius: 20,
+    width: "100%",
+    marginTop: 20,
+    backgroundColor: "#FF7F7F",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
-    borderRadius: "30%",
+  txt: {
+    fontSize: 12,
+    textTransform: "uppercase",
+    fontWeight: "500",
+    color: "white",
   },
 });
