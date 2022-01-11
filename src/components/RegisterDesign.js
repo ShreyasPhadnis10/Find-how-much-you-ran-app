@@ -25,7 +25,7 @@ export default function RegisterDesign({ callBack }) {
         />
 
         <TextInput
-          autoCapitalize={false}
+          autoCapitalize="false"
           secureTextEntry
           value={password}
           placeholder="Password"
