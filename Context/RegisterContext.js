@@ -1,6 +1,7 @@
-import React from "react";
 import createDataContext from "./createDataContext";
 import tracks from "../api/tracks";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { navigate } from "../navigator";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -16,7 +17,8 @@ const SignUp = (dispatch) => {
 
       const token = response.data.token;
 
-      console.log({ token });
+      await AsyncStorage.setItem("token", token);
+      navigate("mainFlow");
     } catch (err) {
       console.log("Something is wrong");
     }
@@ -30,15 +32,40 @@ const SignIn = (dispatch) => {
 
       const token = response.data.token;
 
-      console.log({ token });
+      await AsyncStorage.setItem("token", token);
+
+      navigate("mainFlow");
     } catch (err) {
       console.log("something is wrong ");
     }
   };
 };
 
+const automaticLogin = (dispatch) => {
+  return async () => {
+    const automate = await AsyncStorage.getItem("token");
+
+    if (automate) {
+      navigate("mainFlow");
+    } else {
+      navigate("loginFlow");
+    }
+  };
+};
+
+const SignOut = (dispatch) => {
+  return async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+      navigate("loginFlow");
+    } catch (err) {
+      console.log("There is an error in logging out");
+    }
+  };
+};
+
 export const { Provider, Context } = createDataContext(
   reducer,
-  { SignUp, SignIn },
+  { SignUp, SignIn, automaticLogin, SignOut },
   { signedIn: false }
 );
