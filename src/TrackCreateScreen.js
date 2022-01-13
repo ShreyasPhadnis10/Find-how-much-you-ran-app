@@ -10,8 +10,6 @@ export default function TrackCreateScreen() {
 
       if (status !== "granted") {
         console.log("not granted");
-      } else {
-        console.log("permisssion given");
       }
     } catch (err) {
       console.log("There was some error while requesting location");
