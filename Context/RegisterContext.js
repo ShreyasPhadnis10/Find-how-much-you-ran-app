@@ -20,7 +20,7 @@ const SignUp = (dispatch) => {
       await AsyncStorage.setItem("token", token);
       navigate("mainFlow");
     } catch (err) {
-      console.log("Something is wrong");
+      console.log(err);
     }
   };
 };
@@ -36,7 +36,7 @@ const SignIn = (dispatch) => {
 
       navigate("mainFlow");
     } catch (err) {
-      console.log("something is wrong ");
+      console.log("something is wrong "); //improve this with state error message
     }
   };
 };

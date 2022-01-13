@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import RegisterDesign from "./components/RegisterDesign";
 import RegisterDesignLink from "./components/RegisterDesignLink";
 import { Context as RegisterContext } from "../Context/RegisterContext";
@@ -7,9 +7,10 @@ import { Context as RegisterContext } from "../Context/RegisterContext";
 export default function SignInScreen({ navigation }) {
   const { SignIn } = useContext(RegisterContext);
   return (
-    <View>
+    <View style={styles.container}>
       <RegisterDesign
         callBack={({ email, password }) => SignIn({ email, password })}
+        page="Log in..."
       />
       <RegisterDesignLink
         link="Dont have an account? SignUp"
@@ -22,3 +23,9 @@ export default function SignInScreen({ navigation }) {
 SignInScreen.navigationOptions = () => {
   return { headerShown: false };
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

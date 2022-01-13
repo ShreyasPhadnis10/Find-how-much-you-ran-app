@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { SafeAreaView } from "react-navigation";
 import {
   Text,
   View,
@@ -6,18 +7,21 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 
-export default function RegisterDesign({ callBack }) {
+export default function RegisterDesign({ callBack, page }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.image}>
         <Image source={require("../../img/logo.png")} style={styles.img} />
       </View>
+      <Text style={styles.text}>{page}</Text>
       <View style={styles.input}>
         <TextInput
+          autoCapitalize="none"
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
@@ -25,7 +29,7 @@ export default function RegisterDesign({ callBack }) {
         />
 
         <TextInput
-          autoCapitalize="false"
+          autoCapitalize="none"
           secureTextEntry
           value={password}
           placeholder="Password"
@@ -40,16 +44,16 @@ export default function RegisterDesign({ callBack }) {
       >
         <Text style={styles.txt}>Register</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 5,
     marginLeft: 10,
     marginRight: 20,
+    marginTop: 120,
   },
 
   image: {
@@ -62,7 +66,9 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    padding: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 20,
     marginRight: 50,
   },
@@ -109,5 +115,14 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontWeight: "500",
     color: "white",
+  },
+
+  text: {
+    marginTop: 30,
+    marginRight: 10,
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    color: "gray",
+    fontSize: 20,
   },
 });

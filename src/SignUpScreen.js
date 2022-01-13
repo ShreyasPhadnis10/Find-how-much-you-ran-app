@@ -8,9 +8,10 @@ export default function SignUpScreen({ navigation }) {
   const { SignUp } = useContext(RegisterContext);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <RegisterDesign
         callBack={({ email, password }) => SignUp({ email, password })}
+        page="Sign Up..."
       />
       <RegisterDesignLink
         link="Already have an account? SignIn"
