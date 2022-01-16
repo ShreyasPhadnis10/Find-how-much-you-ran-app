@@ -13,6 +13,7 @@ export default function Maps() {
   }
 
   const { width, height } = Dimensions.get("window");
+
   return (
     <View>
       <MapView
@@ -22,6 +23,9 @@ export default function Maps() {
           longitudeDelta: 0.01,
         }}
         style={{ height: height, width: width }}
+        // showsUserLocation
+        showsMyLocationButton={false}
+        loadingEnabled
       >
         <Circle
           radius={20}
