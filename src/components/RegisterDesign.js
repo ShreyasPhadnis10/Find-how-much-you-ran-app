@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import RegisterDesignLink from "./RegisterDesignLink";
 
 export default function RegisterDesign({ callBack, page }) {
   const [email, setEmail] = useState("");
@@ -53,7 +54,6 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 10,
     marginRight: 20,
-    marginTop: 120,
   },
 
   image: {
