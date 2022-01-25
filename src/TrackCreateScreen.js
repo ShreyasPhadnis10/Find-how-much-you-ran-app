@@ -1,18 +1,27 @@
-// import "../DoNotadd/FakeLocation";
-import React, { useEffect, useContext, useState } from "react";
+import "../DoNotadd/FakeLocation";
+import React, { useEffect, useContext, useState, useCallback } from "react";
 import { View, Dimensions, Text, StyleSheet } from "react-native";
 
 import Maps from "./components/Maps";
 import { Context as LocationContext } from "../Context/LocationContext";
 import useLocation from "../hooks/useLocation";
 import TrackForm from "./components/TrackForm";
+import { withNavigationFocus } from "react-navigation";
 
-export default function TrackCreateScreen() {
-  const { startRecording } = useContext(LocationContext);
+const TrackCreateScreen = ({ isFocused }) => {
+  const {
+    addLocation,
+    state: { recording, location },
+  } = useContext(LocationContext);
 
-  const [err] = useLocation((location) => startRecording(location));
+  const callback = useCallback(
+    (location) => addLocation(location, recording),
+    [recording]
+  );
 
-  const { width, height } = Dimensions.get("window");
+  const [err] = useLocation(callback, isFocused);
+
+  console.log(location.length);
 
   return (
     <View style={{ flex: 1 }}>
@@ -21,6 +30,8 @@ export default function TrackCreateScreen() {
       {err ? <Text>{err}</Text> : null}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({});
+
+export default withNavigationFocus(TrackCreateScreen);

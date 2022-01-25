@@ -5,8 +5,9 @@ import {
   Accuracy,
 } from "expo-location";
 
-export default (callback) => {
+export default (callback, Track) => {
   const [err, setErr] = useState("");
+  const [sub, setSub] = useState(null);
 
   const startTracking = async () => {
     try {
@@ -16,7 +17,7 @@ export default (callback) => {
         console.log("not granted");
       }
 
-      await watchPositionAsync(
+      const subscriber = await watchPositionAsync(
         {
           accuracy: Accuracy.BestForNavigation,
           distanceInterval: 10,
@@ -24,14 +25,21 @@ export default (callback) => {
         },
         callback
       );
+
+      setSub(subscriber);
     } catch (err) {
       setErr("Plz turn location on for the app to function");
     }
   };
 
   useEffect(() => {
-    startTracking();
-  }, []);
+    if (Track) {
+      startTracking();
+    } else {
+      sub.remove();
+      setSub(null);
+    }
+  }, [Track, callback]);
 
   return [err];
 };

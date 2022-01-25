@@ -23,7 +23,7 @@ export default function Maps() {
   const { width, height } = Dimensions.get("window");
 
   return (
-    <View style={{ backgroundColor: "yellow", height: "80%" }}>
+    <View style={{ height: "80%" }}>
       <MapView
         initialRegion={{
           ...currentLocation.coords,
@@ -33,7 +33,6 @@ export default function Maps() {
         style={{
           height: "100%",
           width: width,
-          backgroundColor: "blue",
         }}
         showsUserLocation
         loadingEnabled

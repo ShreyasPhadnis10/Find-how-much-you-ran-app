@@ -1,32 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
+import { Context as LocationContext } from "../../Context/LocationContext";
 
 export default function TrackForm() {
-  return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Enter track Name"
-        style={styles.input}
-      ></TextInput>
+  const {
+    state: { recording, name },
+    startRecording,
+    stopRecording,
+    addName,
+  } = useContext(LocationContext);
 
-      <TouchableOpacity style={styles.btn}>
-        <Text style={{ color: "white" }}>Start Recording</Text>
-      </TouchableOpacity>
-    </View>
+  return (
+    <ScrollView style={{ height: "20%" }}>
+      <View style={styles.container}>
+        <TextInput
+          placeholder="Enter track Name"
+          style={styles.input}
+          value={name}
+          onChangeText={(text) => addName(text)}
+        ></TextInput>
+
+        {!recording ? (
+          <TouchableOpacity style={styles.btn} onPress={() => startRecording()}>
+            <Text style={{ color: "white" }}>Start Recording</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.btn} onPress={() => stopRecording()}>
+            <Text style={{ color: "white" }}>Stop</Text>
+          </TouchableOpacity>
+        )}
+        {/*
+         */}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-
     padding: 10,
+    paddingTop: 0,
   },
 
   input: {
