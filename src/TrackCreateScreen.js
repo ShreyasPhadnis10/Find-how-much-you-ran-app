@@ -21,7 +21,7 @@ const TrackCreateScreen = ({ isFocused }) => {
 
   const [err] = useLocation(callback, isFocused);
 
-  console.log(location.length);
+  // console.log(location.length);
 
   return (
     <View style={{ flex: 1 }}>
