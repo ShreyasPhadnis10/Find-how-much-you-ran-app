@@ -22,6 +22,18 @@ const reducer = (state, action) => {
       return { ...state, name: action.payload };
     }
 
+    case "clear": {
+      return { ...state, name: "", location: [] };
+    }
+
+    case "err": {
+      return { ...state, err: action.payload };
+    }
+
+    case "cleanErr": {
+      return { ...state, err: "" };
+    }
+
     default:
       return state;
   }
@@ -55,8 +67,27 @@ const addLocation = (dispatch) => {
   };
 };
 
+const clearLocation = (dispatch) => {
+  return () => {
+    dispatch({ type: "clear" });
+  };
+};
+
+const errLocation = (dispatch) => {
+  return () => {
+    dispatch({ type: "err", payload: "Plz add your name or location" });
+  };
+};
+
 export const { Context, Provider } = createDataContext(
   reducer,
-  { startRecording, stopRecording, addLocation, addName },
-  { location: [], currentLocation: null, recording: false, name: "" }
+  {
+    startRecording,
+    stopRecording,
+    addLocation,
+    addName,
+    clearLocation,
+    errLocation,
+  },
+  { location: [], currentLocation: null, recording: false, name: "", err: "" }
 );

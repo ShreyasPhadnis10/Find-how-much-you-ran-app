@@ -1,19 +1,13 @@
 import React, { useContext } from "react";
-import MapView, { Circle } from "react-native-maps";
-import {
-  View,
-  Button,
-  Dimensions,
-  ActivityIndicator,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import MapView, { Circle, Polyline } from "react-native-maps";
+import { View, Dimensions, Text } from "react-native";
 import { Context as LocationContext } from "../../Context/LocationContext";
 import TrackForm from "./TrackForm";
+import Saving from "./Saving";
 
 export default function Maps() {
   const {
-    state: { currentLocation },
+    state: { currentLocation, location },
   } = useContext(LocationContext);
 
   if (!currentLocation) {
@@ -23,7 +17,7 @@ export default function Maps() {
   const { width, height } = Dimensions.get("window");
 
   return (
-    <View style={{ height: "80%" }}>
+    <View style={{ height: "75%" }}>
       <MapView
         initialRegion={{
           ...currentLocation.coords,
@@ -34,16 +28,21 @@ export default function Maps() {
           height: "100%",
           width: width,
         }}
-        showsUserLocation
+        // showsUserLocation
         loadingEnabled
       >
-        {/* <Circle
+        <Circle
           radius={20}
           center={{ ...currentLocation.coords }}
           strokeColor="#FF7F7F"
           strokeWidth={6}
           fillColor="#FF7F7F"
-        /> */}
+        />
+
+        <Polyline
+          coordinates={location.map((loc) => loc.coords)}
+          strokeWidth={5}
+        />
       </MapView>
     </View>
   );

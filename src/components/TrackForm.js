@@ -11,7 +11,7 @@ import { Context as LocationContext } from "../../Context/LocationContext";
 
 export default function TrackForm() {
   const {
-    state: { recording, name },
+    state: { recording, name, err },
     startRecording,
     stopRecording,
     addName,
@@ -36,8 +36,8 @@ export default function TrackForm() {
             <Text style={{ color: "white" }}>Stop</Text>
           </TouchableOpacity>
         )}
-        {/*
-         */}
+
+        {err ? <Text>{err}</Text> : null}
       </View>
     </ScrollView>
   );
@@ -46,7 +46,8 @@ export default function TrackForm() {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    padding: 10,
+    paddingRight: 10,
+    paddingLeft: 10,
     paddingTop: 0,
   },
 

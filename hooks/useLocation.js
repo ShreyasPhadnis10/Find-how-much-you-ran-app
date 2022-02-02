@@ -36,9 +36,17 @@ export default (callback, Track) => {
     if (Track) {
       startTracking();
     } else {
-      sub.remove();
-      setSub(null);
+      if (sub) {
+        sub.remove();
+        setSub(null);
+      }
     }
+
+    return () => {
+      if (sub) {
+        sub.remove();
+      }
+    };
   }, [Track, callback]);
 
   return [err];
