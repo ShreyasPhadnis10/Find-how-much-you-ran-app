@@ -13,6 +13,7 @@ import AccountScreen from "./src/AccountScreen";
 import SignUpScreen from "./src/SignUpScreen";
 import SignInScreen from "./src/SignInScreen";
 import LoadingScreen from "./src/components/LoadingScreen";
+import TrackSingleDetailScreen from "./src/TrackSingleDetailScreen";
 
 const navigator = createSwitchNavigator({
   loading: LoadingScreen,
@@ -23,7 +24,10 @@ const navigator = createSwitchNavigator({
 
   mainFlow: createBottomTabNavigator({
     TrackCreate: TrackCreateScreen,
-    TrackDetail: TrackDetailScreen,
+    TrackDetail: createStackNavigator({
+      Track: TrackDetailScreen,
+      SingleTrack: TrackSingleDetailScreen,
+    }),
     Account: AccountScreen,
   }),
 });

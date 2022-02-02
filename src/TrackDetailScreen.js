@@ -3,8 +3,10 @@ import { NavigationEvents, SafeAreaView } from "react-navigation";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { Context as SaveLocationContext } from "../Context/SaveLocationContext";
 
-export default function TrackDetailScreen() {
+export default function TrackDetailScreen({ navigation }) {
   const { state, getTracks } = useContext(SaveLocationContext);
+
+  console.log(state);
 
   return (
     <SafeAreaView style={{ height: "100%", width: "100%", marginTop: 100 }}>
@@ -15,7 +17,11 @@ export default function TrackDetailScreen() {
         keyExtractor={(items) => items._id}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("SingleTrack", { id: item._id });
+              }}
+            >
               <Text
                 style={{
                   fontSize: 15,
